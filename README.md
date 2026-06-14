@@ -4,7 +4,7 @@
 
 ## 🎯 Features
 
-- ✅ **Fast Results Check** - Get results in 2 seconds (vs 5-20min on *113#)
+- ✅ **Fast Results Check** - Get results in 2 seconds (vs 5-20min on *777#)
 - ✅ **Push Notifications** - Instant alerts when results are published
 - ✅ **Multi-Network** - Works on Airtel, MTN, Zain, not just Digitel
 - ✅ **Leaderboard** - See top performers in real-time
@@ -22,7 +22,7 @@
 │         Python Flask Backend API                  │
 │    (Firebase Realtime DB + Cloud Functions)      │
 ├─────────────────────────────────────────────────┤
-│  MOESTI API    │  Digitel *113# USSD (Fallback)  │
+│  MOESTI API    │  Digitel *777# USSD (Fallback)  │
 └─────────────────────────────────────────────────┘
 ```
 
@@ -77,22 +77,10 @@ npm run dev
 3. Save as `backend/firebase-key.json`
 4. Enable Realtime Database
 
-## 📊 Digitel *113# Integration
-
-The app provides a fallback to Digitel's USSD service:
-- **Dial**: `*113#` on Digitel SIM
-- **Cost**: ~100 SSP per check
-- **Speed**: 5-20 minutes
-
-Our app improvement:
-- **Free** to check (optional paid SMS alerts ~50 SSP)
-- **Speed**: 2 seconds via push notification
-- **Networks**: Works on all operators (Airtel, MTN, Zain, Digitel)
-
 ## 📝 TODO
 
 - [ ] Integrate MOESTI API
-- [ ] Digitel *113# fallback button
+- [ ] Digitel *777# fallback
 - [ ] Push notifications
 - [ ] SMS alerts
 - [ ] School marketplace

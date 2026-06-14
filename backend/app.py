@@ -54,6 +54,41 @@ class ResultsCheck(Resource):
             return {'error': str(e)}, 500
 
 
+class DigitelUSSD(Resource):
+    """Generate Digitel *113# USSD code for fallback"""
+    def post(self):
+        try:
+            data = request.get_json()
+            index_number = data.get('index_number')
+            exam_type = data.get('exam_type')  # PLE, S4, S8
+            
+            if not index_number or not exam_type:
+                return {'error': 'Missing index_number or exam_type'}, 400
+            
+            # Digitel *113# format
+            ussd_code = '*113#'
+            
+            return {
+                'status': 'ready',
+                'ussd_code': ussd_code,
+                'exam_type': exam_type,
+                'index_number': index_number,
+                'instructions': [
+                    '1. Dial *113# on your Digitel SIM',
+                    '2. Select option for exam type (PLE/S4/S8)',
+                    '3. Enter your index number: ' + index_number,
+                    '4. Wait 5-20 minutes for SMS with results',
+                    '5. Cost: ~100 SSP'
+                ],
+                'cost': '~100 SSP',
+                'estimated_time': '5-20 minutes'
+            }, 200
+        
+        except Exception as e:
+            logger.error(f'Error generating USSD code: {e}')
+            return {'error': str(e)}, 500
+
+
 class Leaderboard(Resource):
     def get(self):
         try:
@@ -114,6 +149,7 @@ class PushNotification(Resource):
 
 api.add_resource(HealthCheck, '/health')
 api.add_resource(ResultsCheck, '/api/results/check')
+api.add_resource(DigitelUSSD, '/api/digitel/ussd')
 api.add_resource(Leaderboard, '/api/leaderboard')
 api.add_resource(CountdownTimer, '/api/countdown')
 api.add_resource(PushNotification, '/api/notify')
